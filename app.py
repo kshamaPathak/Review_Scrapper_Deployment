@@ -12,11 +12,11 @@ def homePage():
     return render_template("index.html")
 
 @app.route('/review',methods=['POST','GET']) # route to show the review comments in a web UI
-@cross_origin()
+@cross_origin()  # on cloude deployment this is required
 def index():
-    if request.method == 'POST':
+    if request.method == 'POST':  # through brouser this is expected the result.
         try:
-            searchString = request.form['content'].replace(" ","")
+            searchString = request.form['content'].replace(" ","") # if space is typed by user ..e rror should not be there
             flipkart_url = "https://www.flipkart.com/search?q=" + searchString
             uClient = uReq(flipkart_url)
             flipkartPage = uClient.read()
